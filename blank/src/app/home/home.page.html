@@ -1,0 +1,131 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Piloto
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Piloto</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+  <ion-list>
+    <ion-list-header>
+      <ion-label>
+        Busqueda
+      </ion-label>
+    </ion-list-header>
+
+    <ion-item>
+      <ion-label>Opciones</ion-label>
+      <ion-select placeholder="Seleccione uno" [(ngModel)]="query" (ionChange)="queryFunction()">
+        <ion-select-option value="search">Busqueda por id</ion-select-option>
+        <ion-select-option *ngFor="let colum of valores?.columnas" value="{{colum}}">{{colum}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <div *ngIf="boolsearch">
+
+      <ion-item>
+        <ion-label position="fixed">ID</ion-label>
+        <ion-input placeholder="Ingrese ID" [(ngModel)]="idInput"></ion-input>
+      </ion-item>
+
+
+      <ion-button color="medium" expand="block" (click)="busquedaId(idInput)">Enviar</ion-button>
+
+      <br>
+
+      <ion-list *ngIf="boolresultssearch">
+
+        <ion-item *ngFor="let val of data?.columnas; let i = index">
+          <ion-label position="fixed">{{val}}</ion-label>
+          <ion-text>
+            <p>{{data?.valores[0][i]}}</p>
+          </ion-text>
+        </ion-item>
+
+      </ion-list>
+
+    </div>
+
+    <div *ngIf="estadisticaAcquisitionMonth">
+      <ion-card class="welcome-card">
+        <ion-card-header>
+          <ion-card-subtitle>Conteo de meses de compra</ion-card-subtitle>
+          <ion-card-title>Conteo</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <canvas #barChart></canvas>
+          <ion-text id="textoAcquisitionMonth"></ion-text>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+
+    <div *ngIf="estadisticaAcquisitionMonthDate">
+      <ion-card class="welcome-card">
+        <ion-card-header>
+          <ion-card-subtitle>Conteo de dia de compra</ion-card-subtitle>
+          <ion-card-title>Conteo</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <canvas #barChart1></canvas>
+          <ion-text id="textoAcquisitionMonthDate"></ion-text>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <div *ngIf="estadisticaAcquisitionYear">
+      <ion-card class="welcome-card">
+        <ion-card-header>
+          <ion-card-subtitle>Conteo de año de compra</ion-card-subtitle>
+          <ion-card-title>Conteo</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <canvas #barChart2></canvas>
+          <ion-text id="textoAcquisitionYear"></ion-text>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <div *ngIf="estadisticaCompany">
+      <li>
+        <ul *ngFor="let company of data?.valores">{{company}}</ul>
+      </li>
+    </div>
+
+    <div *ngIf="estadisticaCountry">
+      <ion-card class="welcome-card">
+        <ion-card-header>
+          <ion-card-subtitle>Conteo de paises de compra</ion-card-subtitle>
+          <ion-card-title>Conteo</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <canvas #barChart3></canvas>
+          <ion-text id="textoCountry"></ion-text>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <div *ngIf="estadisticaValue">
+      <ion-card class="welcome-card">
+        <ion-card-header>
+          <ion-card-subtitle>Conteo de paises de compra</ion-card-subtitle>
+          <ion-card-title>Conteo</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <canvas #lineChart></canvas>
+          <ion-text id="textoValue"></ion-text>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+  </ion-list>
+
+</ion-content>
